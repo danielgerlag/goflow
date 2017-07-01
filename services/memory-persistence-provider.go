@@ -3,6 +3,8 @@ package services
 import (
 	"errors"
 
+	linq "gopkg.in/ahmetb/go-linq.v3"
+
 	"github.com/danielgerlag/goflow/models"
 	"github.com/nu7hatch/gouuid"
 )
@@ -29,12 +31,15 @@ func (provider *MemoryPersistenceProvider) PersistWorkflow(workflow models.Workf
 }
 
 func (provider MemoryPersistenceProvider) GetRunnableInstances() []string {
-	var result = make([]string, 0)
-	for _, v := range provider.instances {
-		if v.Status == models.Runnable {
-			result = append(result, v.ID)
-		}
-	}
+
+	var result []string
+
+	linq.From(provider.instances).WhereT(func(x models.WorkflowInstance) bool {
+		return x.Status == models.Runnable
+	}).SelectT(func(x models.WorkflowInstance) string {
+		return x.ID
+	}).ToSlice(&result)
+
 	return result
 }
 
