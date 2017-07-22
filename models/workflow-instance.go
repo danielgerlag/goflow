@@ -17,7 +17,7 @@ type WorkflowInstance struct {
 	WorkflowDefinitionID string
 	Version              int
 	Description          string
-	NextExecution        int64
+	NextExecution        time.Time
 	Status               int
 	ExecutionPointers    []ExecutionPointer
 	Data                 interface{}

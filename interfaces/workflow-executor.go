@@ -5,5 +5,5 @@ import (
 )
 
 type WorkflowExecutor interface {
-	Execute(instance models.WorkflowInstance)
+	Execute(instance *models.WorkflowInstance)
 }

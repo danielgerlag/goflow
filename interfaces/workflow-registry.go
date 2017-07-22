@@ -5,5 +5,5 @@ import (
 )
 
 type WorkflowRegistry interface {
-	GetDefinition(workflowID string, version int) models.WorkflowDefinition
+	GetDefinition(workflowID string, version int) (*models.WorkflowDefinition, error)
 }

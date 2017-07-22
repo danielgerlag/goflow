@@ -13,6 +13,7 @@ type WorkflowStep struct {
 	Outcomes []StepOutcome
 	Inputs   []DataMapping
 	Outputs  []DataMapping
+	Children []int
 }
 
 //BodyType  type
